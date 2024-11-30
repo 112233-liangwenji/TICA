@@ -1,0 +1,92 @@
+train_dataset:
+  dataset:
+    name: paired-image-folders
+    args:
+      root_path_1: ./load/SBU_shadow/SBUTrain4K/ShadowImages
+      root_path_2: ./load/SBU_shadow/SBUTrain4K/ShadowMasks
+      cache: none
+      split_key: train
+#      first_k: 1
+
+
+  wrapper:
+    name: train
+    args:
+      inp_size: 400
+      aug_type: simple
+      batch: 4
+  batch_size: 4
+
+val_dataset:
+  dataset:
+    name: paired-image-folders
+    args:
+      root_path_1: ./load/SBU_shadow/SBU_Test/ShadowImages
+      root_path_2: ./load/SBU_shadow/SBU_Test/ShadowMasks
+      cache: none
+      split_key: test
+#      first_k: 1
+
+  wrapper:
+    name: val
+    args:
+
+     inp_size: 400
+  batch_size: 4
+
+eval_type: ber
+
+data_norm:
+  inp: {sub: [0.5], div: [0.5]}
+  gt: {sub: [0.5], div: [0.5]}
+  gt_rgb: {sub: [0.5], div: [0.5]}
+
+model:
+  name: vit
+#  name: segformer, mae
+  args:
+    inp_size: 400
+    loss: bbce
+    ag: True
+    cross:
+    w_bce: 1
+    w_new: 1
+    threshold:
+    use_bs: #True
+    encoder_mode:
+      name: mit_b1 #swin_tiny; resnet_50; hrnet_18; mit_b1
+
+
+optimizer:
+  name: adamw
+  args:
+    lr: 5.e-4 #1.e-3 #1.e-5 #5.e-4 #2.e-4
+epoch_max: 50 #20
+multi_step_lr:
+  milestones: [1]
+  gamma: 0.1
+
+epoch_val: 1
+epoch_save: 1
+
+CRF:
+    ITER_MAX: 10
+    POS_W: 3
+    POS_XY_STD: 1
+    BI_W: 4
+    BI_XY_STD: 67
+    BI_RGB_STD: 3
+
+DATALOADER:
+    NUM_WORKERS: 0
+
+IMAGE:
+    MEAN:
+        R: 122.675
+        G: 116.669
+        B: 104.008
+    SIZE:
+        BASE: # None
+        TRAIN: 321
+        TEST: 540 #istd
+
