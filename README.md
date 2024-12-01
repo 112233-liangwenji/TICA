@@ -60,5 +60,5 @@ python ttt_new.py --config configs/train_{%backbone%}_shadow_{%dataset%}.yaml --
 # 🛎 Citation
 
 # 💗 Acknowledgements
-- This repo is derived from <a href="https://github.com/NiFangBaAGe/Explicit-Visual-Prompt">EVP.
+- This repo is derived from <a href="https://github.com/NiFangBaAGe/Explicit-Visual-Prompt">EVP</a>.
 
