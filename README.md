@@ -39,3 +39,5 @@ Shadow detection is crucial for accurate scene understanding in computer vision,
   <img width="80%" alt="teaser" src="teaser/overview_1.png">
 </p>
 </b> Overview of the proposed TICA. </b> By leveraging light consistency training, the TICA framework enhances the model’s capabilities in shadow detection. Initially, the model is trained with a publicly accessible shadow detection dataset. We then apply random data augmentation techniques—horizontal flipping, resizing, and cropping—to the test set. This facilitates model refinement by enforcing consistent intensity predictions between the two augmented images. The consistency loss is backpropagated to update the encoder.
+
+# ⚙️ Usage
