@@ -1,6 +1,6 @@
 # :star:TICA
 
-<b><a href='https://arxiv.org/pdf/2410.07695'>High-Resolution Document Shadow Removal via A Large-Scale Real-World Dataset and A Frequency-Aware Shadow Erasing Net.</a> </b>
+<b><a href='https://arxiv.org/pdf/2410.07695'>Test-Time Intensity Consistency Adaptation for Shadow Detection.</a> </b>
 <div>
 <span class="author-block">
 Leyi Zhu</a><sup> </sup>
