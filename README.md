@@ -55,6 +55,7 @@ python train.py --config configs/train_{%backbone%}_shadow_{%dataset%}.yaml
 4. TTT:
 ```bash
 python ttt_new.py --config configs/train_{%backbone%}_shadow_{%dataset%}.yaml --model ./save/your_pretrained_model/model_epoch_last.pth --gpu 0 --eval_type ber --name shadow_{%backbone%}_ttt_new_{%consistency%} --bg_cons True --fg_cons True
+```
 
 # 🛎 Citation
 
