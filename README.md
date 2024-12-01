@@ -58,6 +58,15 @@ python ttt_new.py --config configs/train_{%backbone%}_shadow_{%dataset%}.yaml --
 ```
 
 # 🛎 Citation
+If you find our work useful in your research, please consider citing:
+```bib
+@article{zhu2024test,
+  title={Test-Time Intensity Consistency Adaptation for Shadow Detection},
+  author={Zhu, Leyi and Liu, Weihuang and Chen, Xinyi and Li, Zimeng and Chen, Xuhang and Wang, Zhen and Pun, Chi-Man},
+  journal={arXiv preprint arXiv:2410.07695},
+  year={2024}
+}
+```
 
 # 💗 Acknowledgements
 - This repo is derived from <a href="https://github.com/NiFangBaAGe/Explicit-Visual-Prompt">EVP</a>, which is an exellent work, helps us to quickly implement our ideas.
