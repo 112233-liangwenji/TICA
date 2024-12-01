@@ -176,7 +176,6 @@ if __name__ == '__main__':
 
     for epoch in range(epochs):
         metric1[epoch], metric2[epoch], metric3[epoch], metric4[epoch] = [], [], [], []
-        # print('epoch1', epoch)
     learning_rate = 1e-5 #5e-7  # 1e-5 5e-6 1e-6
     # print(len(img_filenames))
     for i in range(len(img_filenames)):
@@ -221,7 +220,6 @@ if __name__ == '__main__':
 
         #strat tent training
         for epoch in range(1, epochs):
-            # print('epoch2', epoch)
             batch_size = 4
             image_aug = []
             #data augmentation
@@ -295,7 +293,6 @@ if __name__ == '__main__':
 
 
     for epoch in range(epochs):
-        # print('epoch3', epoch)
         log_info = ['epoch {}/{}'.format(epoch, epochs)]
         # log_info.append('test: loss={:.4f}'.format(loss))
 
