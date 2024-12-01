@@ -47,7 +47,7 @@ Shadow detection is crucial for accurate scene understanding in computer vision,
 
 # ⚙️ Quick Start
 1. Download the dataset and put it in ./load.
-2. Download the pre-trained backbone.
+2. Download the pre-trained backbone (ResNet-50, Swin-Tiny and Hrnet-18).
 3. Training:
 ```bash
 python train.py --config configs/train_{%backbone%}_shadow_{%dataset%}.yaml 
@@ -60,4 +60,5 @@ python ttt_new.py --config configs/train_{%backbone%}_shadow_{%dataset%}.yaml --
 # 🛎 Citation
 
 # 💗 Acknowledgements
+- This repo is derived from EVP<a href="https://github.com/NiFangBaAGe/Explicit-Visual-Prompt">, which is an exellent work.
 
