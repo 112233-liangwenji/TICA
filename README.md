@@ -28,4 +28,4 @@ Leyi Zhu</a><sup> </sup>
 
 <b>University of Macau</b>
 
-In <b>_International Conference on Computer Vision 2023 (ICCV 2023)_</b>
+In <b>_International Conference on Neural Information Processing 2024 (ICONIP 2024)_</b>
