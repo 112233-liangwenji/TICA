@@ -18,10 +18,10 @@ Leyi Zhu</a><sup> </sup>
       <a href='https://cxh.netlify.app/'> Xuhang Chen</a><sup>‍ </sup>
   </span>,
   <span class="author-block">
-   Zhen Wang</a><sup> 📮</sup>
+   Zhen Wang</a><sup> 
   </span> and
   <span class="author-block">
-  <a href=https://cmpun.github.io/" target="_blank">Chi-Man Pun</a><sup> 📮</sup>
+  <a href=https://cmpun.github.io/" >Chi-Man Pun</a><sup> 📮</sup>
 </span>
   (📮 Corresponding )
 </div>
