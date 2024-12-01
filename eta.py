@@ -32,15 +32,8 @@ import sys, time
 
 def softmax_entropy(x: torch.Tensor) -> torch.Tensor:
     """Entropy of softmax distribution from logits."""
-    # print('x1', x)
     x = x.view(x.size(0), -1)
-    # print('x', x)
-    # print('x.shape', x.shape)
     entropy = -(x.softmax(1) * x.log_softmax(1)).sum(1)
-    # print('x.softmax(1)', x.softmax(1))
-    # print('x.log_softmax(1)', x.log_softmax(1))
-    # print('entropy shape', entropy.shape)
-    # print('entropys value', entropy)
     return entropy
 
 #moving average technique
@@ -202,7 +195,7 @@ if __name__ == '__main__':
 
     for epoch in range(epochs):
         metric1[epoch], metric2[epoch], metric3[epoch], metric4[epoch] = [], [], [], []
-    learning_rate = 1e-5 #5e-7  # 1e-5 5e-6 1e-6
+    learning_rate = 1e-5 #5e-7 
     # print(len(img_filenames))
     for i in range(len(img_filenames)):
         print(str(i) + ' / ' + str(len(img_filenames)))
@@ -250,7 +243,6 @@ if __name__ == '__main__':
             image_aug = []
             #data augmentation
             for b in range(batch_size):
-                # print('batch', b)
                 image_a = img
                 if random.random() < 0.5:
                     image_a = image_a.transpose(Image.FLIP_LEFT_RIGHT)
@@ -271,32 +263,17 @@ if __name__ == '__main__':
             outputs = model.encoder(image_aug)
             outputs = F.interpolate(outputs, size=image.shape[1:], mode='bilinear', align_corners=False)
 
-            # print('outputs shape', outputs.shape) #torch.Size([4, 1, 224, 224])
-
             #entropy loss calculation
-            # loss = softmax_entropy(outputs) #([4, 224, 224]) .mean(0)
-            # print('before', loss.shape) #([1, 50176])
-            entropys = softmax_entropy(outputs)  # ([4, 224, 224]) .mean(0)
+            entropys = softmax_entropy(outputs)  
 
-            # print('entropys shape', entropys.shape) torch.Size([1, 50176])
-
-            # filter unreliable samples
-            # e_margin = math.log(1000) / 2 - 1
             e_margin = 6.5
-            # print('e_margin', e_margin)
             d_margin = 0.05
             filter_ids_1 = torch.where(entropys < e_margin)
-            # print('entropys before', entropys)
-            # print('filter_ids_1', filter_ids_1)
             ids1 = filter_ids_1
-            print('filter_ids_1',  filter_ids_1)
-            ids2 = torch.where(ids1[0] > -0.1)  # ??
+            ids2 = torch.where(ids1[0] > -0.1) 
             entropys = entropys[filter_ids_1]
 
-            print('entropys after', entropys)
-
             current_model_probs = None
-            # print('current_model_probs', current_model_probs)
 
             # filter redundant samples
             if current_model_probs is not None:
@@ -306,27 +283,14 @@ if __name__ == '__main__':
                 entropys = entropys[filter_ids_2]
                 ids2 = filter_ids_2
                 updated_probs = update_model_probs(current_model_probs, outputs[filter_ids_1][filter_ids_2].softmax(1))
-                print('updated_probs 2', updated_probs)
             else:
                 updated_probs = update_model_probs(current_model_probs, outputs[filter_ids_1].softmax(1))
-            print('updated_probs 1', updated_probs)
-            # print('updated_probs.shape', updated_probs.shape)
-            print('entropys.clone()', entropys.clone())
-            print('entropys.clone().detach()', entropys.clone().detach())
+         
             coeff = 1 / (torch.exp(entropys.clone().detach() - e_margin))
             # implementation version 1, compute loss, all samples backward (some unselected are masked)
-            print('coeff', coeff)
             entropys = entropys.mul(coeff)  # reweight entropy losses for diff. samples
 
             loss = entropys.mean(0)
-            # loss = entropys.sum()
-
-            # loss = loss.sum() # loss = loss.mean()
-
-
-
-            print('loss value', loss) #???
-
 
             # adapt
             loss.backward()
@@ -341,16 +305,12 @@ if __name__ == '__main__':
                 pred = F.interpolate(pred, size=image.shape[1:], mode='bilinear', align_corners=False)
                 pred = torch.sigmoid(pred) #1582
 
-                # print('gt', gt.unsqueeze(0))
-
             m1, m2, m3, m4 = metric_fn(pred.cpu(), gt.unsqueeze(0)) #evaluate the epoch th test-time trained model
 
             metric1[epoch].append(m1)
             metric2[epoch].append(m2)
             metric3[epoch].append(m3)
             metric4[epoch].append(m4)
-            # print('m1:', m1, 'm2:', m2, 'm3:', m3)
-            print(metric1_name, ':', m1, metric2_name, ':', m2, metric3_name, ':', m3, metric4_name, ':', m4)
 
 
     for epoch in range(epochs):
@@ -374,9 +334,3 @@ if __name__ == '__main__':
 
         print("Time cost: {}h{}mins{}s".format(hours, minutes, seconds))
         # print("Time cost: {:.2f} seconds".format(time_cost))
-
-
-
-
-
-
