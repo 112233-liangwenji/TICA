@@ -45,5 +45,14 @@ Shadow detection is crucial for accurate scene understanding in computer vision,
 - **ISTD**: https://github.com/DeepInsight-PCALab/ST-CGAN
 - **SBU**: https://www3.cs.stonybrook.edu/~cvl/projects/shadow_noisy_label/index.html
 
-# ⚙️ Usage
+# ⚙️ Quick Start
+1. Download the dataset and put it in ./load.
+2. Download the pre-trained backbone.
+3. Training:
+```bash
+python train.py --config configs/train_{%backbone%}_shadow_{%dataset%}.yaml 
+```
+4. Evaluation:
+```bash
+python ttt_new.py --config configs/train_{%backbone%}_shadow_{%dataset%}.yaml --model ./save/your_pretrained_model/model_epoch_last.pth --gpu 0 --eval_type ber --name shadow_{%backbone%}_ttt_new_{%consistency%} --bg_cons True --fg_cons True
 
