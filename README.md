@@ -3,10 +3,10 @@
 <b><a href='https://arxiv.org/pdf/2410.07695'>Test-Time Intensity Consistency Adaptation for Shadow Detection.</a> </b>
 <div>
 <span class="author-block">
-Leyi Zhu</a><sup> </sup>
+Leyi Zhu</a><sup> 👨‍💻‍ </sup>
 </span>,
   <span class="author-block">
-    <a href='https://github.com/NiFangBaAGe'> Weihuang Liu</a><sup>‍ </sup>
+    <a href='https://github.com/NiFangBaAGe'> Weihuang Liu</a><sup>‍ 👨‍💻‍ </sup>
   </span>,
     <span class="author-block">
    Xinyi Chen</a><sup>‍ </sup>
@@ -23,7 +23,7 @@ Leyi Zhu</a><sup> </sup>
   <span class="author-block">
   <a href="https://cmpun.github.io/" >Chi-Man Pun</a><sup> 📮</sup>
 </span>
-  (📮 Corresponding )
+  (👨‍💻‍ Equal contributions, 📮 Corresponding )
 </div>
 
 <b>University of Macau</b>
