@@ -33,13 +33,8 @@ import sys, time
 def softmax_entropy(x: torch.Tensor) -> torch.Tensor:
     """Entropy of softmax distribution from logits."""
     x = x.view(x.size(0), x.size(1), -1)
-    # print('x', x)
     x1 = torch.softmax(x, dim=0)
     x2 = torch.log_softmax(x, dim=0)
-    # print('x1', x1)
-    # print('x2', x2)
-    # entropy = -(x * x.log_softmax(1)).sum(1) #-(x * torch.log(x)).sum(0).mean(0)
-    # return -(x.softmax(1) * x.log_softmax(1)).sum(1)
     entropy = -(x1 * x2).mean(0)
     return entropy
 
@@ -185,8 +180,7 @@ if __name__ == '__main__':
 
     for epoch in range(epochs):
         metric1[epoch], metric2[epoch], metric3[epoch], metric4[epoch] = [], [], [], []
-        # print('epoch1', epoch)
-    learning_rate = 1e-5 #5e-7  # 1e-5 5e-6 1e-6
+    learning_rate = 1e-5 #5e-7  
     # print(len(img_filenames))
     for i in range(len(img_filenames)):
         print(str(i) + ' / ' + str(len(img_filenames)))
@@ -230,7 +224,6 @@ if __name__ == '__main__':
 
         #strat tent training
         for epoch in range(1, epochs):
-            # print('epoch2', epoch)
             batch_size = 4
             image_aug = []
             #data augmentation
@@ -250,23 +243,16 @@ if __name__ == '__main__':
 
             #train tent
             model.train()
-            # tent_model = tent.Tent(model=model, optimizer=optimizer, steps=1, episodic=False)
 
             #forward
             outputs = model.encoder(image_aug)
             outputs = F.interpolate(outputs, size=image.shape[1:], mode='bilinear', align_corners=False)
 
             #entropy loss calculation
-            loss = softmax_entropy(outputs) #([4, 224, 224]) .mean(0)
-            # print('before', loss.shape) #([1, 50176])
+            loss = softmax_entropy(outputs) 
 
-            loss = loss.sum() # loss = loss.mean()
-
-            # print('after', loss.shape) #torch.Size([])
-
-            print('loss value', loss) #???
-
-
+            loss = loss.sum() 
+            
             # adapt
             loss.backward()
             optimizer.step()
@@ -288,12 +274,9 @@ if __name__ == '__main__':
             metric2[epoch].append(m2)
             metric3[epoch].append(m3)
             metric4[epoch].append(m4)
-            # print('m1:', m1, 'm2:', m2, 'm3:', m3)
-            print(metric1_name, ':', m1, metric2_name, ':', m2, metric3_name, ':', m3, metric4_name, ':', m4)
-
+         
 
     for epoch in range(epochs):
-        # print('epoch3', epoch)
         log_info = ['epoch {}/{}'.format(epoch, epochs)]
         # log_info.append('test: loss={:.4f}'.format(loss))
 
@@ -314,9 +297,3 @@ if __name__ == '__main__':
 
         print("Time cost: {}h{}mins{}s".format(hours, minutes, seconds))
         # print("Time cost: {:.2f} seconds".format(time_cost))
-
-
-
-
-
-
